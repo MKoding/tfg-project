@@ -1,0 +1,8 @@
+{
+  "namespaces": [
+    {
+      "namespace": "Admin",
+      "path": "Front/Resources/Views"
+    }
+  ]
+}

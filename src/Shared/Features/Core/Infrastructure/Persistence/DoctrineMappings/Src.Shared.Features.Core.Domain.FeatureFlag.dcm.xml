@@ -1,0 +1,11 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Src\Shared\Features\Core\Domain\FeatureFlag" table="feature_flags" read-only="true">
+        <id name="name" type="string" column="name">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="enabled" column="is_enabled" type="boolean"/>
+    </entity>
+</doctrine-mapping>
