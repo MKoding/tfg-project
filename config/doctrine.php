@@ -81,31 +81,7 @@ return [
                 'bit' => 'boolean',
                 'enum' => 'string'
             ]
-        ],
-        'admin' => [
-            'dev' => env('APP_DEBUG', false),
-            'meta' => env('DOCTRINE_METADATA', 'xml'),
-            'connection' => env('DB_CONNECTION', 'mysql'),
-            'namespaces' => [],
-            'paths' => [
-                base_path('src/Admin/Core/Infrastructure/Persistence/DoctrineMappings'),
-            ],
-            'repository' => Doctrine\ORM\EntityRepository::class,
-            'proxies' => [
-                'namespace' => false,
-                'path' => storage_path('proxies'),
-                'auto_generate' => env('DOCTRINE_PROXY_AUTOGENERATE', true)
-            ],
-            'events' => [
-                'listeners' => [],
-                'subscribers' => []
-            ],
-            'filters' => [],
-            'mapping_types' => [
-                'bit' => 'boolean',
-                'enum' => 'string'
-            ]
-        ],
+        ]
     ],
 
     /*

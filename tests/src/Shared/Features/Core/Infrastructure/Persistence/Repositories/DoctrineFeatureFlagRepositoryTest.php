@@ -10,13 +10,13 @@ use Src\Shared\Features\Core\Application\Exceptions\FeatureFlagAlreadyExistsExce
 use Src\Shared\Features\Core\Application\Exceptions\FeatureFlagNotFoundException;
 use Src\Shared\Features\Core\Domain\FeatureFlag;
 use Src\Shared\Features\Core\Infrastructure\Persistence\Repositories\DoctrineFeatureFlagRepository;
+use Tests\BaseTestCase;
 use Tests\Src\Shared\Features\Core\Domain\FeatureFlagTestDataBuilder;
-use Tests\TestCase;
 
 /**
  * @group Unit
  */
-class DoctrineFeatureFlagRepositoryTest extends TestCase
+class DoctrineFeatureFlagRepositoryTest extends BaseTestCase
 {
     private ObjectRepository $objectRepository;
     private ObjectManager $objectManager;

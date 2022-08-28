@@ -13,6 +13,8 @@ services:
     container_name: "laravel-application"
     restart: unless-stopped
     working_dir: /var/www/
+    stdin_open: true
+    tty: true
     volumes:
       - ./:/var/www
     networks:

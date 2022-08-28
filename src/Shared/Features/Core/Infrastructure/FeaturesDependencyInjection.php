@@ -11,6 +11,9 @@ class FeaturesDependencyInjection extends ServiceProvider
 {
     public function register()
     {
-        $this->app->bind(FeatureFlagRepository::class, fn () => new DoctrineFeatureFlagRepository(app(ManagerRegistry::class)));
+        $this->app->bind(
+            FeatureFlagRepository::class,
+            fn () => new DoctrineFeatureFlagRepository(app(ManagerRegistry::class))
+        );
     }
 }
