@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1037648bb9f42a6eb2b42660b954bc3f",
+    "content-hash": "928e7362fb541d71f0c72beceb6c8e56",
     "packages": [
         {
             "name": "brick/math",
@@ -8868,16 +8868,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "1.3.1",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "fe37a0eafe6ea040804255c70e9808af13314f87"
+                "reference": "71c627a0838f107562e89bc2b0201a81f26e9011"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/fe37a0eafe6ea040804255c70e9808af13314f87",
-                "reference": "fe37a0eafe6ea040804255c70e9808af13314f87",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/71c627a0838f107562e89bc2b0201a81f26e9011",
+                "reference": "71c627a0838f107562e89bc2b0201a81f26e9011",
                 "shasum": ""
             },
             "require": {
@@ -8954,7 +8954,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-06-17T06:28:57+00:00"
+            "time": "2022-08-26T13:28:24+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
