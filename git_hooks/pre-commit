@@ -22,7 +22,7 @@ function __run() #(step, name, cmd)
 }
 
 modified="git diff --diff-filter=M --name-only --cached  | grep \".php$\""
-ignore="boostrap,config,database,docker-compose,node-modules,public,resources,storage,vendor"
+ignore="bootstrap,config,database,docker-compose,node-modules,public,resources,scripts,storage,vendor"
 phpcs="vendor/bin/phpcs --report=code --colors --report-width=80 --standard=PSR2 --ignore=${ignore}"
 
 __run "1/3" "php lint" "${modified} | xargs -r php -l"

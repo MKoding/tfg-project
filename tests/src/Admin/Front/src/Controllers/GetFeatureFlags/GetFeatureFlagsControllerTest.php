@@ -2,12 +2,12 @@
 
 namespace Tests\Src\Admin\Front\src\Controllers\GetFeatureFlags;
 
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 
 /**
  * @group Integration
  */
-class GetFeatureFlagsControllerTest extends TestCase
+class GetFeatureFlagsControllerTest extends DatabaseTestCase
 {
     /**
      * @test
