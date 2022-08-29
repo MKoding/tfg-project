@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c6b0100cdd5e003450cada0522c8d4c",
+    "content-hash": "96fad7dcf9a135d5a912953fcb76d0a6",
     "packages": [
         {
             "name": "brick/math",
@@ -1840,16 +1840,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.23.0",
+            "version": "v9.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c4eea9060d847b5c93957b203caa8f57544a76ab"
+                "reference": "1ccfb91afee7a351b09ba1f1b97739096a3ad1cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c4eea9060d847b5c93957b203caa8f57544a76ab",
-                "reference": "c4eea9060d847b5c93957b203caa8f57544a76ab",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/1ccfb91afee7a351b09ba1f1b97739096a3ad1cf",
+                "reference": "1ccfb91afee7a351b09ba1f1b97739096a3ad1cf",
                 "shasum": ""
             },
             "require": {
@@ -2016,7 +2016,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-08-02T14:24:44+00:00"
+            "time": "2022-08-23T19:00:07+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -2648,16 +2648,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.61.0",
+            "version": "2.62.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "bdf4f4fe3a3eac4de84dbec0738082a862c68ba6"
+                "reference": "7507aec3d626797ce2123cf6c6556683be22b5f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bdf4f4fe3a3eac4de84dbec0738082a862c68ba6",
-                "reference": "bdf4f4fe3a3eac4de84dbec0738082a862c68ba6",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/7507aec3d626797ce2123cf6c6556683be22b5f8",
+                "reference": "7507aec3d626797ce2123cf6c6556683be22b5f8",
                 "shasum": ""
             },
             "require": {
@@ -2746,7 +2746,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-06T12:41:24+00:00"
+            "time": "2022-08-28T19:48:05+00:00"
         },
         {
             "name": "nette/schema",
