@@ -1,9 +1,41 @@
-name: PR's validation
+name: Master branch validation
 
-on: [pull_request]
+on:
+  push:
+    branches: [ master ]
+
+env:
+  DOCKER_USER: ${{secrets.DOCKER_USER}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+  IMAGE_NAME: ${{secrets.IMAGE_NAME}}
 
 jobs:
+  Build_and_push_docker_image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files using defaults
+        id: changed-files
+        uses: tj-actions/changed-files@v29.0.2
+
+      - name: Build the docker image
+        if: contains(steps.changed-files.outputs.modified_files, 'Dockerfile')
+        run: docker build --build-arg user=laravel-docker --build-arg uid=1001 . --file Dockerfile --tag $DOCKER_USER/$IMAGE_NAME:latest
+
+      - name: Login to DockerHub
+        if: contains(steps.changed-files.outputs.modified_files, 'Dockerfile')
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
+
+      - name: Push the docker image
+        if: contains(steps.changed-files.outputs.modified_files, 'Dockerfile')
+        run: docker push $DOCKER_USER/$IMAGE_NAME --all-tags
+
   Prepare_environment:
+    needs: Build_and_push_docker_image
     runs-on: ubuntu-latest
     container:
       image: mkoding/tfg-project:latest
@@ -90,7 +122,7 @@ jobs:
 
       - name: Install composer dependencies
         if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+        run: docker compose exec app -u root bash -c 'composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: Composer dump autoload
         run: composer dump-autoload

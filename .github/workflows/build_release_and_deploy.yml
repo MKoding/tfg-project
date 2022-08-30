@@ -1,0 +1,138 @@
+name: Build, release and deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      web_major_version:
+        description: 'Web major version'
+        required: true
+        default: '1'
+      web_minor_version:
+        description: 'Web minor version'
+        required: true
+        default: '0'
+      web_patch_version:
+        description: 'Web patch version'
+        required: true
+        default: '0'
+
+env:
+  IMAGE_NAME: ${{secrets.IMAGE_NAME}}
+  DOCKER_USER: ${{secrets.DOCKER_USER}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+  GOOGLE_CLOUD_PROJECT_ID: ${{secrets.GOOGLE_CLOUD_PROJECT_ID}}
+  GOOGLE_CLOUD_EMAIL: ${{secrets.GOOGLE_CLOUD_EMAIL}}
+  GOOGLE_CLOUD_KEY: ${{secrets.GOOGLE_CLOUD_KEY}}
+
+jobs:
+  Create_release_branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create release branch
+        run: git checkout -b release/v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
+
+      - name: Initialize mandatory git config
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email noreply@github.com
+
+      - name: Push new branch
+        run: git push origin release/v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
+
+  Build_and_push_docker_image:
+    needs: Create_release_branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: release/v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
+
+      - name: Get changed files using defaults
+        id: changed-files
+        uses: tj-actions/changed-files@v29.0.2
+
+      - name: Build the docker image
+        run: docker build --build-arg user=laravel-docker --build-arg uid=1001 . --file Dockerfile --tag $IMAGE_NAME:latest
+
+      - name: Add tags
+        run: |
+          docker tag $IMAGE_NAME:latest $DOCKER_USER/$IMAGE_NAME:latest
+          docker tag $IMAGE_NAME:latest $DOCKER_USER/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}
+          docker tag $IMAGE_NAME:latest $DOCKER_USER/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}
+          docker tag $IMAGE_NAME:latest $DOCKER_USER/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
+          docker tag $IMAGE_NAME:latest gcr.io/$GOOGLE_CLOUD_PROJECT_ID/$IMAGE_NAME:latest
+          docker tag $IMAGE_NAME:latest gcr.io/$GOOGLE_CLOUD_PROJECT_ID/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}
+          docker tag $IMAGE_NAME:latest gcr.io/$GOOGLE_CLOUD_PROJECT_ID/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}
+          docker tag $IMAGE_NAME:latest gcr.io/$GOOGLE_CLOUD_PROJECT_ID/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
+
+      - name: Login to DockerHub
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
+
+      - name: Push the docker image to DockerHub
+        if: contains(steps.changed-files.outputs.modified_files, 'Dockerfile')
+        run: |
+          docker push $DOCKER_USER/$IMAGE_NAME:latest
+          docker push $DOCKER_USER/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}
+          docker push $DOCKER_USER/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}
+          docker push $DOCKER_USER/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
+
+      - name: Login to Google Cloud
+        uses: google-github-actions/setup-gcloud@v0.6.0
+        with:
+          project_id: ${{ env.GOOGLE_CLOUD_PROJECT_ID }}
+          service_account_email: ${{ env.GOOGLE_CLOUD_EMAIL }}
+          service_account_key: ${{ env.GOOGLE_CLOUD_KEY }}
+
+      - name: Configure docker client for Google Cloud
+        run: gcloud auth configure-docker --quiet
+
+      - name: Push the docker image to Google Cloud
+        if: contains(steps.changed-files.outputs.modified_files, 'Dockerfile')
+        run: |
+          docker push gcr.io/$GOOGLE_CLOUD_PROJECT_ID/$IMAGE_NAME:latest
+          docker push gcr.io/$GOOGLE_CLOUD_PROJECT_ID/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}
+          docker push gcr.io/$GOOGLE_CLOUD_PROJECT_ID/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}
+          docker push gcr.io/$GOOGLE_CLOUD_PROJECT_ID/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
+
+  Deploy_in_google_cloud:
+    needs: Build_and_push_docker_image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout to release branch
+        uses: actions/checkout@v3
+        with:
+          ref: release/v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
+
+      - name: Login to Google Cloud
+        uses: google-github-actions/setup-gcloud@v0.6.0
+        with:
+          project_id: ${{ env.GOOGLE_CLOUD_PROJECT_ID }}
+          service_account_email: ${{ env.GOOGLE_CLOUD_EMAIL }}
+          service_account_key: ${{ env.GOOGLE_CLOUD_KEY }}
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v0.10.1
+        with:
+          service: ${{ env.IMAGE_NAME }}
+          image: gcr.io/${{ env.GOOGLE_CLOUD_PROJECT_ID }}/${{ env.IMAGE_NAME }}:v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
+          region: europe-southwest1
+
+      - name: Show output URL
+        run: echo ${{ steps.deploy.outputs.url }}
+
+  Clean_failure:
+    needs: Deploy_in_google_cloud
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Delete release branch
+        run: git push origin --delete release/v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
