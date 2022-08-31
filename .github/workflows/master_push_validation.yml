@@ -46,9 +46,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Prepare environment file
-        run: cp .env.ci .env
-
       - name: Cache vendor
         uses: actions/cache@v3
         id: composer-cache
