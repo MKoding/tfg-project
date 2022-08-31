@@ -46,9 +46,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Prepare environment file
-        run: cp .env.ci .env
-
       - name: Cache vendor
         uses: actions/cache@v3
         id: composer-cache
@@ -122,7 +119,7 @@ jobs:
 
       - name: Install composer dependencies
         if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: docker compose exec app -u root bash -c 'composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: Composer dump autoload
         run: composer dump-autoload

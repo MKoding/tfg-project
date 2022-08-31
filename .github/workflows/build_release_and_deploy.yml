@@ -23,6 +23,7 @@ env:
   GOOGLE_CLOUD_PROJECT_ID: ${{secrets.GOOGLE_CLOUD_PROJECT_ID}}
   GOOGLE_CLOUD_EMAIL: ${{secrets.GOOGLE_CLOUD_EMAIL}}
   GOOGLE_CLOUD_KEY: ${{secrets.GOOGLE_CLOUD_KEY}}
+  GOOGLE_CLOUD_DB_SOCKET: /cloudsql/polar-equinox-361020:europe-southwest1:database
 
 jobs:
   Create_release_branch:
@@ -122,6 +123,8 @@ jobs:
           service: ${{ env.IMAGE_NAME }}
           image: gcr.io/${{ env.GOOGLE_CLOUD_PROJECT_ID }}/${{ env.IMAGE_NAME }}:v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
           region: europe-southwest1
+          env-vars: DB_SOCKET=${{ env.GOOGLE_CLOUD_DB_SOCKET }}
+          flags: --port=8080
 
       - name: Show output URL
         run: echo ${{ steps.deploy.outputs.url }}

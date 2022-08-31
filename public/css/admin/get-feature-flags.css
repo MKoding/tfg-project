@@ -1,0 +1,40 @@
+.feature-flags_title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-flags_table td,
+.feature-flags_table th {
+    padding: .625rem;
+    border: .063rem solid;
+    text-align: center;
+}
+
+.feature-flag_flag_status_anchor,
+.feature-flag_flag_delete_anchor,
+.feature-flag_flag_add_anchor {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.feature-flag_flag_name_input,
+.feature-flag_flag_status_input {
+    border: none;
+}
+
+.feature-flag_flag_name_input:focus,
+.feature-flag_flag_status_input:focus {
+    outline: none;
+}
+
+.feature-flag_flag_name_input {
+    text-align: center;
+}
+
+.feature-flags_table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-collapse: collapse;
+}
