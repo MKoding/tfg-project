@@ -1,11 +1,15 @@
+FROM composer:latest as build
+WORKDIR /app
+COPY . /app
+RUN composer install --no-interaction --no-progress && composer dumpautoload
+
 FROM alpine:latest
 
-# Arguments defined in docker-compose.yml
 ARG user
 ARG uid
 
 WORKDIR /var/www
-COPY . /var/www
+COPY --from=build /app /var/www/
 RUN cp .env.prod .env
 
 # Install packages and remove default server definition
@@ -51,14 +55,14 @@ RUN apk add --no-cache \
 RUN ln -s /usr/bin/php81 /usr/bin/php
 
 # Configure nginx
-COPY docker-compose/nginx.conf /etc/nginx/nginx.conf
+COPY docker/nginx.conf /etc/nginx/nginx.conf
 
 # Configure PHP-FPM
-COPY docker-compose/fpm-pool.conf /etc/php81/php-fpm.d/www.conf
-COPY docker-compose/php.ini /etc/php81/conf.d/custom.ini
+COPY docker/fpm-pool.conf /etc/php81/php-fpm.d/www.conf
+COPY docker/php.ini /etc/php81/conf.d/custom.ini
 
 # Configure supervisord
-COPY docker-compose/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -78,9 +82,6 @@ RUN chown -R $user.$user /var/www /run /var/lib/nginx /var/log/nginx
 
 # Switch to use a non-root user from here on
 USER $user
-
-# Install composer dependencies
-RUN composer install && composer dumpautoload
 
 # Expose the port nginx is reachable on
 EXPOSE 8080
