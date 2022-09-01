@@ -5,6 +5,8 @@ ARG user
 ARG uid
 
 WORKDIR /var/www
+COPY . /var/www
+RUN cp .env.prod .env
 
 # Install packages and remove default server definition
 RUN apk add --no-cache \
@@ -76,6 +78,9 @@ RUN chown -R $user.$user /var/www /run /var/lib/nginx /var/log/nginx
 
 # Switch to use a non-root user from here on
 USER $user
+
+# Install composer dependencies
+RUN composer install && composer dumpautoload
 
 # Expose the port nginx is reachable on
 EXPOSE 8080
