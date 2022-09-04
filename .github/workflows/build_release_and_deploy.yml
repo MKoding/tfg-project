@@ -58,7 +58,7 @@ jobs:
         uses: tj-actions/changed-files@v29.0.3
 
       - name: Build the docker image
-        run: docker build --build-arg user=laravel-docker --build-arg uid=1001 . --file Dockerfile --tag $IMAGE_NAME:latest
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME:latest
 
       - name: Add tags
         run: |

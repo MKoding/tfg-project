@@ -4,19 +4,16 @@ services:
   # APPLICATION SERVICE
   app:
     build:
-      args:
-        user: laravel-docker
-        uid: 1001
       context: ./
       dockerfile: Dockerfile
     image: alpine-nginx-php-fpm
     container_name: "laravel-application"
     restart: unless-stopped
     ports:
-      - "8000:8080"
-    working_dir: /var/www/
+      - "8000:80"
+    working_dir: /app
     volumes:
-      - ./:/var/www
+      - ./:/app
     networks:
       - laravel
 
