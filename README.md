@@ -24,7 +24,7 @@ The project must be mounted using docker:
   - Run: `cp .env.example .env`
   - Run: `php artisan key:generate`
   - Run: `php artisan migrate`
-- Web running on http://localhost:8000
+- Web running on http://localhost:8000/admin/feature-flags
 - As database we use MySQL:
   - Database name: laravel-docker
   - Database user: master
