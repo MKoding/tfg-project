@@ -1,0 +1,19 @@
+.home_title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home_feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.25rem;
+}
+
+.home_version {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2.5rem;
+}

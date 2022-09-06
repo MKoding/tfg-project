@@ -65,5 +65,8 @@
                 </tr>
             </form>
         </table>
+        <div class="feature-flags_home">
+            <a href="{{ route('public.home') }}">🏠 - Home</a>
+        </div>
     </div>
 @endsection
