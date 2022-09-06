@@ -38,3 +38,10 @@
     justify-content: center;
     border-collapse: collapse;
 }
+
+.feature-flags_home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.25rem;
+}

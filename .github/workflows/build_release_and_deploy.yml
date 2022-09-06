@@ -53,10 +53,6 @@ jobs:
           fetch-depth: 0
           ref: release/v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
 
-      - name: Get changed files using defaults
-        id: changed-files
-        uses: tj-actions/changed-files@v29.0.3
-
       - name: Build the docker image
         run: docker build . --file Dockerfile --tag $IMAGE_NAME:latest
 
@@ -75,7 +71,6 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
 
       - name: Push the docker image to DockerHub
-        if: contains(steps.changed-files.outputs.modified_files, 'Dockerfile')
         run: |
           docker push $DOCKER_USER/$IMAGE_NAME:latest
           docker push $DOCKER_USER/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}
@@ -93,7 +88,6 @@ jobs:
         run: gcloud auth configure-docker --quiet
 
       - name: Push the docker image to Google Cloud
-        if: contains(steps.changed-files.outputs.modified_files, 'Dockerfile')
         run: |
           docker push gcr.io/$GOOGLE_CLOUD_PROJECT_ID/$IMAGE_NAME:latest
           docker push gcr.io/$GOOGLE_CLOUD_PROJECT_ID/$IMAGE_NAME:v${{ github.event.inputs.web_major_version }}

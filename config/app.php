@@ -184,6 +184,7 @@ return [
          * Bounded Context Service Providers...
          */
         Src\Admin\AdminServiceProvider::class,
+        Src\Public\PublicServiceProvider::class,
     ],
 
     /*
