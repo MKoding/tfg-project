@@ -1,2 +1,36 @@
 @import 'normalize.css';
 @import 'admin/get-feature-flags.css';
+@import 'public/get-home.css';
+
+html {
+    background-color: #1B202B;
+}
+
+body {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: #E7E8F1;
+}
+
+a {
+    text-decoration: none;
+    color: #EB4332;
+}
+
+h1 {
+    color: #EB4332;
+}
+
+input[type=text] {
+    background: none;
+    color: #E7E8F1;
+}
+
+select {
+    background: none;
+    color: #E7E8F1;
+}
+
+.text_bold {
+    font-weight: bolder;
+    letter-spacing: .3rem;
+}

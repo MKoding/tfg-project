@@ -21,7 +21,7 @@ function __run() #(step, name, cmd)
     fi
 }
 
-ignore="\( -path ./bootstrap -prune -o -path ./config -prune -o -path ./database -prune -o -path ./docker-compose -prune -o -path ./node-modules -prune -o -path ./public -prune -o -path ./resources -prune -o -path ./scripts -prune -o -path ./storage -prune -o -path ./vendor -prune \)"
+ignore="\( -path ./bootstrap -prune -o -path ./config -prune -o -path ./database -prune -o -path ./docker -prune -o -path ./node-modules -prune -o -path ./public -prune -o -path ./scripts -prune -o -path ./storage -prune -o -path ./vendor -prune \)"
 files="find . ${ignore} -o -type f -name '*.php' -print"
 phpcs="vendor/bin/phpcs --report=code --colors --report-width=80 --standard=PSR2"
 
