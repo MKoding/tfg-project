@@ -19,12 +19,20 @@
                 <span>🟢 Hello this a feature controlled by the feature flag => "feature_1" 🟢</span>
             </div>
         @endif
+        @if($getHomeView->useFeature('feature_2'))
+            <div class="home_feature">
+                <a href="{{ route('public.feature-two') }}">🟢 - Feature Two</a>
+            </div>
+        @else
+            <div class="home_feature">
+                <span>🔴 - Feature Unavailable</span>
+            </div>
+        @endif
         <div class="home_feature">
             <a href="{{ route('admin.feature-flags') }}">🏳 - Feature Flags Manager</a>
         </div>
         <div class="home_version">
-            <span class="text_bold">v1.0.0</span>
+            <span class="text_bold">v1.1.0</span>
         </div>
     </div>
 @endsection
-

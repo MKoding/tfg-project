@@ -1,0 +1,19 @@
+.feature-two_title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-two_feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.25rem;
+}
+
+.feature-two_home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.25rem;
+}

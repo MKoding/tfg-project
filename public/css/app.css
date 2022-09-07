@@ -1,6 +1,7 @@
 @import 'normalize.css';
 @import 'admin/get-feature-flags.css';
 @import 'public/get-home.css';
+@import 'public/get-feature-two.css';
 
 html {
     background-color: #1B202B;
