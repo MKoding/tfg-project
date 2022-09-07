@@ -14,6 +14,6 @@ class ExampleTest extends BaseTestCase
      */
     public function assertsThatTrueIsTrue()
     {
-        $this->assertTrue(true);
+        $this->assertTrue(false);
     }
 }
