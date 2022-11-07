@@ -9,6 +9,6 @@
         "laravel-vite-plugin": "0.7.0",
         "lodash": "4.17.21",
         "postcss": "8.4.18",
-        "vite": "3.2.2"
+        "vite": "3.2.3"
     }
 }
