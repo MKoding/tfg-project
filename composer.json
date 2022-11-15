@@ -10,7 +10,7 @@
         "laravel-doctrine/orm": "1.8.1",
         "laravel/framework": "9.40.1",
         "laravel/sanctum": "3.0.1",
-        "laravel/tinker": "2.7.2"
+        "laravel/tinker": "2.7.3"
     },
     "require-dev": {
         "brianium/paratest": "6.6.5",
