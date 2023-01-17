@@ -9,7 +9,7 @@
         "guzzlehttp/guzzle": "7.5.0",
         "laravel-doctrine/orm": "1.8.1",
         "laravel/framework": "9.47.0",
-        "laravel/sanctum": "3.2.0",
+        "laravel/sanctum": "3.2.1",
         "laravel/tinker": "2.8.0"
     },
     "require-dev": {
