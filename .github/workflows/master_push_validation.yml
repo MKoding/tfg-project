@@ -20,7 +20,7 @@ jobs:
 
       - name: Get changed files using defaults
         id: changed-files
-        uses: tj-actions/changed-files@v29.0.9
+        uses: tj-actions/changed-files@v36.4.1
 
       - name: Build the docker image
         if: contains(steps.changed-files.outputs.modified_files, 'Dockerfile')
