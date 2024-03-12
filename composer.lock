@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e78adc15f02b2bbfe694db870f7681d",
+    "content-hash": "36f7e2b8c66863a4474c3136a610af3c",
     "packages": [
         {
             "name": "brick/math",
@@ -7329,7 +7329,7 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "1.6.7",
+            "version": "1.6.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
