@@ -21,7 +21,7 @@
         "mockery/mockery": "1.6.9",
         "nunomaduro/collision": "6.4.0",
         "phpstan/phpstan": "1.10.60",
-        "phpunit/phpunit": "9.6.16",
+        "phpunit/phpunit": "9.6.17",
         "spatie/laravel-ignition": "1.6.4",
         "squizlabs/php_codesniffer": "3.8.1"
     },
