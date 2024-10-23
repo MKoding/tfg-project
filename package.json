@@ -8,7 +8,7 @@
         "axios": "0.28.1",
         "laravel-vite-plugin": "0.8.1",
         "lodash": "4.17.21",
-        "postcss": "8.4.35",
+        "postcss": "8.4.47",
         "vite": "3.2.8"
     }
 }
