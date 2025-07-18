@@ -112,7 +112,7 @@ jobs:
 
       - name: Deploy to Cloud Run
         id: deploy
-        uses: google-github-actions/deploy-cloudrun@v0.11.0
+        uses: google-github-actions/deploy-cloudrun@v2.7.4
         with:
           service: ${{ env.IMAGE_NAME }}
           image: gcr.io/${{ env.GOOGLE_CLOUD_PROJECT_ID }}/${{ env.IMAGE_NAME }}:v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
