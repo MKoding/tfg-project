@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Create release branch
         run: git checkout -b release/v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           ref: release/v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
@@ -99,7 +99,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout to release branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           ref: release/v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
 
@@ -129,7 +129,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Delete release branch
         run: git push origin --delete release/v${{ github.event.inputs.web_major_version }}.${{ github.event.inputs.web_minor_version }}.${{ github.event.inputs.web_patch_version }}
