@@ -19,7 +19,7 @@
         "laravel/pint": "1.29.0",
         "laravel/sail": "1.54.0",
         "mockery/mockery": "1.6.12",
-        "nunomaduro/collision": "6.4.0",
+        "nunomaduro/collision": "8.9.1",
         "phpstan/phpstan": "1.12.33",
         "phpunit/phpunit": "9.6.34",
         "spatie/laravel-ignition": "1.7.2",
