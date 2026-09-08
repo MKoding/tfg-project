@@ -20,7 +20,7 @@
         "laravel/sail": "1.67.0",
         "mockery/mockery": "1.6.15",
         "nunomaduro/collision": "6.4.0",
-        "phpstan/phpstan": "1.12.34",
+        "phpstan/phpstan": "2.2.13",
         "phpunit/phpunit": "9.6.36",
         "spatie/laravel-ignition": "1.7.2",
         "squizlabs/php_codesniffer": "3.13.6"
